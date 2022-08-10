@@ -1,0 +1,13 @@
+{
+  "name": "Screen Time",
+  "description": "Screen time the most visited websites.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["idle", "tabs", "storage"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

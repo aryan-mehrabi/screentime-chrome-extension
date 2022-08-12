@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 const Popup = () => {
   const ref = useRef(null);
@@ -28,18 +29,34 @@ const Popup = () => {
   const config = {
     type: "bar",
     data: data,
+    plugins: [ChartDataLabels],
     options: {
       indexAxis: "y",
       scales: {
         x: {
+          ticks: {
+            display: false,
+          },
           grid: {
             display: false,
+            drawBorder: false,
+            drawOnChartArea: false,
+            drawTicks: false,
           },
         },
         y: {
           grid: {
             display: false,
+            drawBorder: false,
+            drawOnChartArea: false,
+            drawTicks: false,
           },
+        },
+      },
+      plugins: {
+        datalabels: {
+          anchor: "end",
+          align: "end",
         },
       },
     },

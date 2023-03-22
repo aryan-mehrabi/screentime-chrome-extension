@@ -1,27 +1,24 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
-const Popup = () => {
+const HorizontalBar = ({ labels, datas }) => {
   const ref = useRef(null);
 
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "july",
-  ];
+  useEffect(() => {
+    new Chart(ref.current, config);
+  }, []);
+
+  console.log(labels, datas);
+
   const data = {
     labels: labels,
     datasets: [
       {
         label: "Screen Time",
-        backgroundColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.4)",
         borderColor: "rgb(255, 99, 132)",
-        data: [0, 10, 5, 2, 20, 30, 45],
+        data: datas,
       },
     ],
   };
@@ -32,6 +29,11 @@ const Popup = () => {
     plugins: [ChartDataLabels],
     options: {
       indexAxis: "y",
+      layout: {
+        padding: {
+          right: 30,
+        },
+      },
       scales: {
         x: {
           ticks: {
@@ -40,16 +42,12 @@ const Popup = () => {
           grid: {
             display: false,
             drawBorder: false,
-            drawOnChartArea: false,
-            drawTicks: false,
           },
         },
         y: {
           grid: {
             display: false,
             drawBorder: false,
-            drawOnChartArea: false,
-            drawTicks: false,
           },
         },
       },
@@ -57,20 +55,17 @@ const Popup = () => {
         datalabels: {
           anchor: "end",
           align: "end",
+          formatter: function (value, context) {
+            return value + "s";
+          },
+        },
+        legend: {
+          display: false,
         },
       },
     },
   };
-
-  useEffect(() => {
-    const myChart = new Chart(ref.current, config);
-  }, []);
-
-  return (
-    <div>
-      <canvas ref={ref} />
-    </div>
-  );
+  return <canvas ref={ref} />;
 };
 
-export default Popup;
+export default HorizontalBar;
